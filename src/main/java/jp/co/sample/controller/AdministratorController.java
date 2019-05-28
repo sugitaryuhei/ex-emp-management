@@ -51,7 +51,12 @@ public class AdministratorController {
 	//ログイン画面を表示
 	@RequestMapping("/")
 	public String toLogin() {
-		return "admistrator/login";
+		return "administrator/login";
 	}
+	
+	
+	
+	
+	
 
 }
