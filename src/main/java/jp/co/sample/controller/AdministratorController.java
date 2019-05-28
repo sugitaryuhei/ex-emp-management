@@ -81,7 +81,6 @@ public class AdministratorController {
 			model.addAttribute("massage", "メールアドレスが不正です");
 			return "administrator/login";
 		}
-		
 		model.addAttribute("administrator", administrator);
 		return "employee/showList";
 	}
