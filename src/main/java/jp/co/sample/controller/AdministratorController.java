@@ -8,14 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
+import jp.co.sample.form.LoginForm;
 import jp.co.sample.service.AdministratorService;
 
 /**
  * @author ryuheisugita
  *管理者情報を操作するコントローラー
- */
-/**
- * @return
  */
 @Controller
 @RequestMapping("/")
@@ -27,6 +25,10 @@ public class AdministratorController {
 	@ModelAttribute
 	public InsertAdministratorForm setUpInsertAdministratorForm() {
 		return new InsertAdministratorForm();
+	}
+	@ModelAttribute
+	public LoginForm setUpLoginForm() {
+		return new LoginForm();
 	}
 	
     //管理者登録画面を表示
@@ -44,6 +46,12 @@ public class AdministratorController {
 		//管理者情報を登録
 		service.insert(administrator);
 		return "redirect:/";
+	}
+	
+	//ログイン画面を表示
+	@RequestMapping("/")
+	public String toLogin() {
+		return "admistrator/login";
 	}
 
 }
