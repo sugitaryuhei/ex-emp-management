@@ -22,7 +22,7 @@ public class AdminisratorRepository {
 		Administrator administrator = new Administrator();
 		administrator.setId(rs.getInt("id"));
 		administrator.setName(rs.getString("name"));
-		administrator.setMail_address(rs.getString("mail_address"));
+		administrator.setMailAddress(rs.getString("mail_address"));
 		administrator.setPassword(rs.getString("password"));
 		return administrator;
 	};
@@ -35,6 +35,14 @@ public class AdminisratorRepository {
 		System.out.println("insert()の呼び出し");
 	}
 	
-	public void findByMailAddressAndPassword()
+	/**
+	 * @param mailAddress
+	 * @param password
+	 * @return Administrator
+	 */
+	public Administrator findByMailAddressAndPassword( String mailAddress, String password) {
+		System.out.println("findByMailAddressAndPassword()の呼び出し");
+		return new Administrator();
+	}
 
 }
