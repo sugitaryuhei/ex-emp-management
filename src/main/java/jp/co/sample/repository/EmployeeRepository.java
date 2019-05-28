@@ -43,21 +43,28 @@ public class EmployeeRepository {
 	String tableName = "employees";
 	
 	/**
+	 * 従業員一覧を表示するメソッド.
+	 * 
 	 * @return 従業員一覧を入社日順で表示
 	 */
 	public List<Employee> findAll(){
-		String sql = "select * from " + tableName + "order by dependents_count";
+		String sql = "select id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characterics,dependents_count"
+				       + " from " + tableName + "order by hire_date";
 		List<Employee> employeeList = template.query(sql, EMPLOYEE_ROW_MAPPER);
 		System.out.println("findAll()の呼び出し");
 		return employeeList;
 	}
 	
 	/**
-	 * @param id
-	 * @return 検索された従業員情報
+	 * 指定されたIDの従業員情報を取得するメソッド.
+	 * 
+	 * @param id ID
+	 * @return 従業員情報 
+	 * @throws DataAccessExcreption 1件も検索されない場合に発生
 	 */
 	public Employee load(Integer id) {
-		String sql = "select * from " + tableName + " where id=:id";
+		String sql = "select select id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characterics,dependents_count"
+			           	+ " from " + tableName + " where id=:id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		Employee employee = template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
 		System.out.println("load()の呼び出し");
@@ -65,7 +72,8 @@ public class EmployeeRepository {
 	}
 	
 	/**
-	 * 従業員情報の変更
+	 * 従業員情報を変更するメソッド.
+	 * 
 	 * @param employee
 	 */
 	public void update(Employee employee) {

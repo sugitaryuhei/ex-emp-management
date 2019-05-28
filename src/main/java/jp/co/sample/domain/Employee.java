@@ -3,23 +3,35 @@ package jp.co.sample.domain;
 import java.util.Date;
 
 /**
- * @author ryuheisugita
+ * 従業員情報を表すドメイン.
  * 
- *従業員情報を表すドメイン
+ * @author ryuheisugita
  */
 public class Employee {
 
+	/** ID */
 	private Integer id;
+	/** name */
 	private String name;
+	/** image */
 	private String image;
+	/** gender */
 	private String gender;
+	/** hireDate */
 	private Date hireDate;
+	/** mailAddress */
 	private String mailAddress;
+	/** zipCode */
 	private String zipCode;
+	/** address */
 	private String address;
+	/** telephone */
 	private String telephone;
+	/** salary */
 	private Integer salary;
+	/** characteristics */
 	private String characteristics;
+	/** dependentsCount*/
 	private Integer dependentsCount;
 	
 	public Integer getId() {

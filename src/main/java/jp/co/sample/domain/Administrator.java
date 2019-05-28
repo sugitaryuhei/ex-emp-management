@@ -2,15 +2,19 @@ package jp.co.sample.domain;
 
 
 /**
+ * 管理者情報を表すドメイン.
+ * 
  * @author ryuheisugita
  *
- *管理者情報を表すドメイン
  */
 public class Administrator {
-
+	/** ID */
 	private Integer id;
+	/** 名前 */
 	private String name;
+	/** メールアドレス */
 	private String mailAddress;
+	/** パスワード */
 	private String password;
 	
 	@Override
