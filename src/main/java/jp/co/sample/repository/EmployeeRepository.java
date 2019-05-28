@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import jp.co.sample.domain.Administrator;
@@ -38,12 +40,16 @@ public class EmployeeRepository {
 		return employee;
 	};
 	
+	String tableName = "employees";
+	
 	/**
 	 * @return 従業員一覧を入社日順で表示
 	 */
 	public List<Employee> findAll(){
+		String sql = "select * from " + tableName + "order by dependents_count";
+		List<Employee> employeeList = template.query(sql, EMPLOYEE_ROW_MAPPER);
 		System.out.println("findAll()の呼び出し");
-		return null;
+		return employeeList;
 	}
 	
 	/**
@@ -51,8 +57,11 @@ public class EmployeeRepository {
 	 * @return 検索された従業員情報
 	 */
 	public Employee load(Integer id) {
+		String sql = "select * from " + tableName + " where id=:id";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+		Employee employee = template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
 		System.out.println("load()の呼び出し");
-		return new Employee();
+		return employee;
 	}
 	
 	/**
@@ -60,6 +69,11 @@ public class EmployeeRepository {
 	 * @param employee
 	 */
 	public void update(Employee employee) {
+		String sql = "update " + tableName + " set dependents_count=:dependentsCount where id=:id";
+		SqlParameterSource param = new MapSqlParameterSource()
+				                                       .addValue("depedents_count", employee.getDependentsCount())
+				                                       .addValue("id", employee.getId());
+		template.update(sql, param);
 		System.out.println("update()の呼び出し");
 	}
 }
