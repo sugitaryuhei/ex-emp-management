@@ -1,5 +1,10 @@
 package jp.co.sample.form;
 
+/**
+ * 扶養を更新するためのフォーム.
+ *  
+ * @author 81907
+ */
 public class UpdateEmployeeForm {
 	
 	/** ID */
