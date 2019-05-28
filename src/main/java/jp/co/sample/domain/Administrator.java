@@ -34,7 +34,7 @@ public class Administrator {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getMail_address() {
+	public String getMailAddress() {
 		return mailAddress;
 	}
 	public void setMailAddress(String mailAddress) {

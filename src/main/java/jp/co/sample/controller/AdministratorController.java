@@ -80,9 +80,9 @@ public class AdministratorController {
 		if(administrator == null) {
 			model.addAttribute("massage", "メールアドレスが不正です");
 			return "administrator/login";
-		}else {
-			model.addAttribute("administrator", administrator);
-		    return "employee/showList";
-	    }
+		}
+		
+		model.addAttribute("administrator", administrator);
+		return "employee/showList";
 	}
 }	
