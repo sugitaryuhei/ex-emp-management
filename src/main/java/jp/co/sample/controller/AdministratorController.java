@@ -1,5 +1,8 @@
 package jp.co.sample.controller;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,9 @@ public class AdministratorController {
 	
 	@Autowired
 	private AdministratorService service;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@ModelAttribute
 	public InsertAdministratorForm setUpInsertAdministratorForm() {
@@ -75,13 +81,25 @@ public class AdministratorController {
 	 * 　　　　 　　　従業員一覧画面(メールアドレスとパスワードがデータベースと一致した場合)　
 	 */
 	@RequestMapping("/login")
-	public String login(LoginForm form, Model model) {
+	public String login(LoginForm form) {
 		Administrator administrator = service.login(form.getMailAddress(), form.getPassword());
 		if(administrator == null) {
-			model.addAttribute("massage", "メールアドレスが不正です");
+			session.setAttribute("massage", "メールアドレスが不正です");
 			return "administrator/login";
 		}
-		model.addAttribute("administrator", administrator);
+		session.setAttribute("administratorName", administrator.getName());
 		return "redirect:/employee/showList";
 	}
+	
+	/**
+	 * ログアウトをする.
+	 * 
+	 * @return ログアウト画面
+	 */
+	@RequestMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 }	

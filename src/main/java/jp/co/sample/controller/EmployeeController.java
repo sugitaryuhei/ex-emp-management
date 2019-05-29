@@ -1,13 +1,16 @@
 package jp.co.sample.controller;
 
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.domain.Employee;
+import jp.co.sample.form.EmployeeForm;
 import jp.co.sample.form.UpdateEmployeeForm;
 import jp.co.sample.service.EmployeeService;
 
@@ -56,17 +59,51 @@ public class EmployeeController {
 		return "employee/detail";
 	}
 	
+	/**
+	 * 扶養人数を更新する.
+	 * 
+	 * @param form IDと更新する不要人数の情報
+	 * @return　従業員一覧画面
+	 */
 	@RequestMapping("/update")
 	public String update(UpdateEmployeeForm form) {
 		Employee employee = service.showDetail(form.getId());
-		System.out.println(employee);
 		employee.setDependentsCount(form.getDependentsCount());
-		System.out.println(employee);
 		service.update(employee);
-		System.out.println(employee);
 		return "redirect:/employee/showList";
 	}
 	
 	
+	/**
+	 * 従業員情報登録画面を表示するメソッド.
+	 * 
+	 * @return 従業員情報登録画面
+	 */
+	@RequestMapping("/toAdd")
+	public String toAdd() {
+		return "employee/add";
+	}
+	
+	@Autowired
+	private EmployeeForm setUpEmployeeForm() {
+		return new EmployeeForm();
+	}
+	/**
+	 * 従業員登録を行う.
+	 * 
+	 * @param form 従業員情報を受け取るフォーム
+	 * @return　従業員登録
+	 */
+	@RequestMapping("/add")
+	public String add(EmployeeForm form) {
+		System.out.println(form);
+		Employee employee = new Employee();
+		BeanUtils.copyProperties(form, employee);
+		Date date = (Date) java.sql.Date.valueOf(form.getHireDate());
+		employee.setHireDate(date);
+		System.out.println(employee);
+		service.insert(employee);
+		return "redirect:/employee/showList";
+	}
 
 }

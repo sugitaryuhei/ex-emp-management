@@ -51,9 +51,7 @@
 		<!-- パンくずリスト -->
 		<ol class="breadcrumb">
 			<li class="active"><a href="list.html" th:href="@{/employee/showList}">従業員リスト</a></li>
-		</ol>
-		<ol class="breadcrumb">
-			<li class="active"><a href="add.html" th:href="@{/employee/toAdd}">従業員の追加</a></li>
+			<li class="active">従業員の追加</li>
 		</ol>
 
 		<!-- table -->
@@ -63,30 +61,20 @@
 
 <!-- ここから上を編集する必要はありません -->
 
-<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>従業員名</th>
-							<th>入社日</th>
-							<th>扶養人数</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="employee:${employeeList}">
-							<td>
-								<a th:href="@{/employee/showDetail?id=}+${employee.id}">
-									<span th:text="${employee.name}">山田太郎</span>
-								</a>
-							</td>
-							<td>
-								<span th:text="${employee.hireDate}">2016/12/1</span>
-							</td>
-							<td>
-								<span th:text="${employee.dependentsCount}">3人</span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+<form th:action="@{/employee/add}" method="post">
+名前：<input type="text" name="name"><br>
+画像：<input type="text" name="image"><br>
+性別：<input type="text" name="gender"><br>
+入社日：<input type="date" name="hireDate"><br>
+メールアドレス：<input type="text" name="mailAddress"><br>
+郵便番号：<input type="text" name="zipCode"><br>
+住所：<input type="text" name="address"><br>
+電話番号：<input type="text" name="telephone"><br>
+給料：<input type="text" name="salary"><br>
+特性：<textarea rows="3" cols="30" name="characteristics" ></textarea>
+扶養人数：<input type="text" name="dependentsCount"><br>
+<button>登録</button>
+</form>
 
 
 <!-- ここから下を編集する必要はありません -->

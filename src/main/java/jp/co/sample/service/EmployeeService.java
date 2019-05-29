@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.sample.domain.Employee;
+import jp.co.sample.form.EmployeeForm;
 import jp.co.sample.repository.EmployeeRepository;
 
 /**
@@ -50,4 +51,12 @@ public class EmployeeService {
 		repository.update(employee);
 	}
 
+	/**
+	 * 従業員情報を登録するメソッド.
+	 * 
+	 * @param employee 登録する従業員情報
+	 */
+	public void insert(Employee employee) {
+		repository.insert(employee);
+	}
 }
