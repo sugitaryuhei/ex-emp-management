@@ -55,5 +55,18 @@ public class EmployeeController {
 		System.out.println("detail");
 		return "employee/detail";
 	}
+	
+	@RequestMapping("/update")
+	public String update(UpdateEmployeeForm form) {
+		Employee employee = service.showDetail(form.getId());
+		System.out.println(employee);
+		employee.setDependentsCount(form.getDependentsCount());
+		System.out.println(employee);
+		service.update(employee);
+		System.out.println(employee);
+		return "redirect:/employee/showList";
+	}
+	
+	
 
 }

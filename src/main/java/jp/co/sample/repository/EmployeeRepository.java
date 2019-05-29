@@ -79,7 +79,7 @@ public class EmployeeRepository {
 	public void update(Employee employee) {
 		String sql = "update " + tableName + " set dependents_count=:dependentsCount where id=:id";
 		SqlParameterSource param = new MapSqlParameterSource()
-				                                       .addValue("depedents_count", employee.getDependentsCount())
+				                                       .addValue("dependentsCount", employee.getDependentsCount())
 				                                       .addValue("id", employee.getId());
 		template.update(sql, param);
 		System.out.println("update()の呼び出し");

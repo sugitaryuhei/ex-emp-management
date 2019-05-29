@@ -40,5 +40,14 @@ public class EmployeeService {
 	public Employee showDetail(Integer id) {
 		return repository.load(id);
 	}
+	
+	/**
+	 * 従業員情報を更新するメソッド.
+	 * 
+	 * @param employee 更新する従業員情報
+	 */
+	public void update(Employee employee) {
+		repository.update(employee);
+	}
 
 }
