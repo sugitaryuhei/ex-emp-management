@@ -1,5 +1,6 @@
 package jp.co.sample.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -80,7 +81,12 @@ public class EmployeeController {
 	 * @return 従業員情報登録画面
 	 */
 	@RequestMapping("/toAdd")
-	public String toAdd() {
+	public String toAdd(Model model) {
+		List<String> imgList = new ArrayList<String>();
+		imgList.add("e1.png");
+		imgList.add("e2.png");
+		imgList.add("sakamoto.jpg");
+		model.addAttribute("imgList", imgList);
 		return "employee/add";
 	}
 	
@@ -96,12 +102,10 @@ public class EmployeeController {
 	 */
 	@RequestMapping("/add")
 	public String add(EmployeeForm form) {
-		System.out.println(form);
 		Employee employee = new Employee();
 		BeanUtils.copyProperties(form, employee);
 		Date date = (Date) java.sql.Date.valueOf(form.getHireDate());
 		employee.setHireDate(date);
-		System.out.println(employee);
 		service.insert(employee);
 		return "redirect:/employee/showList";
 	}

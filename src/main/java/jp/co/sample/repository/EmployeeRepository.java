@@ -69,7 +69,6 @@ public class EmployeeRepository {
 			           	+ " from " + tableName + " where id=:id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		Employee employee = template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
-		System.out.println("load()の呼び出し");
 		return employee;
 	}
 	
@@ -98,6 +97,5 @@ public class EmployeeRepository {
 				                                            + " values (:name,:image,:gender,:hireDate,:mailAddress,:zipCode,:address,:telephone,:salary,:characteristics,:dependentsCount)";
 		SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
 		template.update(sql, param);
-		System.out.println("insert()の呼び出し");
 	}
 }

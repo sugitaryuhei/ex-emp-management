@@ -7,8 +7,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
@@ -81,10 +84,17 @@ public class AdministratorController {
 	 * 　　　　 　　　従業員一覧画面(メールアドレスとパスワードがデータベースと一致した場合)　
 	 */
 	@RequestMapping("/login")
-	public String login(LoginForm form) {
+	public String login(@Validated LoginForm form, BindingResult result, Model model) {
+		
+		if(result.hasErrors()) {
+			System.out.println("errors");
+			return toLogin();
+		}
+		
 		Administrator administrator = service.login(form.getMailAddress(), form.getPassword());
 		if(administrator == null) {
-			session.setAttribute("massage", "メールアドレスが不正です");
+			System.out.println("null");
+			model.addAttribute("massage", "メールアドレスが不正です");
 			return "administrator/login";
 		}
 		session.setAttribute("administratorName", administrator.getName());
