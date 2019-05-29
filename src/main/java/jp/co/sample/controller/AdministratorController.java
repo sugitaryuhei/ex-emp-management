@@ -82,6 +82,6 @@ public class AdministratorController {
 			return "administrator/login";
 		}
 		model.addAttribute("administrator", administrator);
-		return "employee/showList";
+		return "redirect:/employee/showList";
 	}
 }	

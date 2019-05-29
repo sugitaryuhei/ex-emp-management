@@ -48,8 +48,8 @@ public class EmployeeRepository {
 	 * @return 従業員一覧を入社日順で表示
 	 */
 	public List<Employee> findAll(){
-		String sql = "select id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characterics,dependents_count"
-				       + " from " + tableName + "order by hire_date";
+		String sql = "select id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count"
+				       + " from " + tableName + " order by hire_date";
 		List<Employee> employeeList = template.query(sql, EMPLOYEE_ROW_MAPPER);
 		System.out.println("findAll()の呼び出し");
 		return employeeList;
@@ -63,7 +63,7 @@ public class EmployeeRepository {
 	 * @throws DataAccessExcreption 1件も検索されない場合に発生
 	 */
 	public Employee load(Integer id) {
-		String sql = "select select id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characterics,dependents_count"
+		String sql = "select id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count"
 			           	+ " from " + tableName + " where id=:id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		Employee employee = template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
