@@ -1,7 +1,5 @@
 package jp.co.sample.form;
 
-import java.util.Date;
-
 /**
  * 従業員追加の際に使用するフォーム.
  * 

@@ -10,9 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import jp.co.sample.domain.Administrator;
 import jp.co.sample.domain.Employee;
-import jp.co.sample.form.EmployeeForm;
 
 /**
  * @author ryuheisugita
@@ -83,7 +81,6 @@ public class EmployeeRepository {
 				                                       .addValue("dependentsCount", employee.getDependentsCount())
 				                                       .addValue("id", employee.getId());
 		template.update(sql, param);
-		System.out.println("update()の呼び出し");
 	}
 	
 	/**
